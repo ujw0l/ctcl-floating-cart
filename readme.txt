@@ -34,11 +34,9 @@ It is compatible with CT Commerce Lite ecommerce plugin 2.0.2 and later.
 It can be used wherever block can be added but it is designed to be used in navigation section. 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Adding navigation block on Appearance > Editor section
+2. Block setting of the block
+2. Floating cart on frontend(userfacing side)
 
 == Changelog ==
 
