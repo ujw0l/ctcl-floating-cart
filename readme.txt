@@ -1,25 +1,23 @@
 === Ctcl Floating Cart ===
-Contributors:      The WordPress Contributors
-Tags:              block
+Contributors:      UjW0L
+Donate link: https://www.patreon.com/ujw0l/membership
+Tags:              block, ecommerce, cart, floating cart,
 Tested up to:      6.2.2
 Stable tag:        0.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block scaffolded with Create Block tool.
+Floating cart fro CT Commerce lite ecommerce plugin
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Floating cart block for CT Commerce Lite ecommerce plugin. Customer will be able to peak in their cart using this block.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
 
-e.g.
 
 1. Upload the plugin files to the `/wp-content/plugins/ctcl-floating-cart` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
@@ -27,14 +25,13 @@ e.g.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Which ecommerce plugin it is compatible with? =
 
-An answer to that question.
+It is compatible with CT Commerce Lite ecommerce plugin 2.0.2 and later.
 
-= What about foo bar? =
+= Where it can be used? =
 
-Answer to foo bar dilemma.
-
+It can be used wherever block can be added but it is designed to be used in navigation section. 
 == Screenshots ==
 
 1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
