@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ctc-lite/ctcl-floating-cart",
+	"version": "0.1.0",
+	"title": "CTCL Floating Cart",
+	"category": "ctc-lite-blocks",
+	"icon": "cart",
+	"description": "Floating cart for CT Commerce Lite ",
+	"supports": {
+		"html": false
+	},
+	"example":{},
+	"textdomain": "ctcl-floating-cart",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript":"file:./frontend.js",
+	"style": "file:./style-index.css"
+}
