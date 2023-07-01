@@ -136,7 +136,7 @@ onChange={val=> setAttributes({bgColor:val})}
 	 
 	  </div>
 
-<div ref={cartContent} className='ctcl-floating-cart-content' style={{ position:'absolute',marginTop:"5px",display:'none', zIndex:'1000000', color:`${attributes.fontColor}`,backgroundColor:`${attributes.bgColor}`, width:'400px', textAlign:'center' }}> <p className={`dashicons-before ${attributes.iconType} ctcl-floating-cart-content`}> {__('Contains cart items','ctcl-floating-cart')} </p> </div>
+<div ref={cartContent} className='ctcl-floating-cart-content' style={{border:`1px solid ${attributes.fontColor}`,borderRadius:'5px', boxShadow:`5px 10px 8px #888888` , position:'absolute',marginTop:"5px",display:'none', zIndex:'1000000', color:`${attributes.fontColor}`,backgroundColor:`${attributes.bgColor}`, width:'400px', textAlign:'center' }}> <p className={`dashicons-before ${attributes.iconType} ctcl-floating-cart-content`}> {__('Contains cart items','ctcl-floating-cart')} </p> </div>
 		</div>
 
 </div>
