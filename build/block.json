@@ -4,7 +4,7 @@
   "name": "ctc-lite/ctcl-floating-cart",
   "version": "0.1.0",
   "title": "CTCL Floating Cart",
-  "category": "ctc-lite-blocks",
+  "category": "transform",
   "icon": "cart",
   "description": "Floating cart for CT Commerce Lite ",
   "supports": {

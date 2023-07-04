@@ -128,7 +128,7 @@ onChange={val=> setAttributes({bgColor:val})}
 
 
 </InspectorControls>
-     <div ref={wholeCont}>
+     <div ref={wholeCont} style={{display:'inline-block'}}>
 	 <div><div  ref={cartIcon} className= {`ctcl-floating-cart-icon dashicons ${attributes.iconType}`} style={{color:`${attributes.fontColor}`, fontSize:`${attributes.iconSize}px`, backgroundColor:`${attributes.bgColor}`,marginLeft:"auto", marginRight:'auto',  height:'auto',width:'auto',padding:'5px',cursor:'pointer',  }}>
 	 <div style={{ borderRadius : '100%', position: 'absolute',display:'inline-block', width:'auto', height:'auto', padding:`${attributes.iconSize/8}px`,paddingTop:`${attributes.iconSize/20}px`, border:`0.5px solid ${attributes.fontColor}`, marginTop:`-10px`,backgroundColor:attributes.bgColor, color:attributes.fontColor,fontSize:`${attributes.iconSize/5}px`}}> 0 </div>
 		</div> 
