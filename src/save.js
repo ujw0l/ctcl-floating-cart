@@ -18,7 +18,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 export default function save({attributes}) {
 	return (
 		<div { ...useBlockProps.save() } style={{display:'inline-block'}}>
-				<div  className= {`ctcl-floating-cart-icon dashicons ${attributes.iconType}`} style={{color:`${attributes.fontColor}`, fontSize:`${attributes.iconSize}px`, backgroundColor:`${attributes.bgColor}`,marginLeft:"auto", marginRight:'auto',  height:'auto',width:'auto',padding:'5px',cursor:'pointer'  }}>
+				<div  className= {`ctcl-floating-cart-icon dashicons ${attributes.iconType}`} style={{ display:'inline-block', color:`${attributes.fontColor}`, fontSize:`${attributes.iconSize}px`, backgroundColor:`${attributes.bgColor}`,marginLeft:"auto", marginRight:'auto',  height:'auto',width:'auto',padding:'5px',cursor:'pointer'  }}>
 					
 				<div className='ctcl-floating-cart-item-count' style={{ borderRadius : '100%', position: 'absolute',display:'inline-block', width:'auto', height:'auto', padding:`${attributes.iconSize/8}px`,paddingTop:`${attributes.iconSize/20}px`, border:`0.5px solid ${attributes.fontColor}`, marginTop:`-10px`,backgroundColor:attributes.bgColor, color:attributes.fontColor,fontSize:`${attributes.iconSize/5}px`}}> 0 </div>
 
