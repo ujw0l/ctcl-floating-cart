@@ -35,8 +35,8 @@ add_action( 'init', 'create_block_ctcl_floating_cart_block_init' );
 	 */
 	 add_action( 'admin_notices', function(){
 		 echo '<div class="notice notice-error is-dismissible"><p>';
-		  _e( 'CTCL Floating Cart plugin requires CT Commerece Lite plugin installed and activated to work, please do so first.', 'ctcl-floating-cart' );
-		  echo '<a href="'.admin_url('plugin-install.php').'?tab=plugin-information&plugin=ctc-lite&TB_iframe=true&width=640&height=500" class="thickbox">'.__('Click Here to install it','ctcl-floating-cart').' </a>'; 
+		 esc_html(_e( 'CTCL Floating Cart plugin requires CT Commerece Lite plugin installed and activated to work, please do so first.', 'ctcl-floating-cart' ));
+		  echo '<a href="'.esc_url(admin_url('plugin-install.php')).'?tab=plugin-information&plugin=ctc-lite&TB_iframe=true&width=640&height=500" class="thickbox">'.esc_html(__('Click Here to install it','ctcl-floating-cart')).' </a>'; 
 		 echo '</p></div>';
 	 } );
 
