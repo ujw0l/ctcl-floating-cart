@@ -1,1 +1,6 @@
-.ctcl-floating-cart-content:before{padding-top:3px}
+/* Keep the editor preview in the block flow so it cannot cover other blocks. */
+.editor-styles-wrapper .wp-block-ctc-lite-ctcl-floating-cart div.ctcl-floating-cart-content {
+    position: static !important; display: block !important; width: 320px !important;
+    max-width: 100% !important; margin-top: 12px !important; box-shadow: none !important;
+}
+.editor-styles-wrapper .wp-block-ctc-lite-ctcl-floating-cart > div { max-width: 100%; }

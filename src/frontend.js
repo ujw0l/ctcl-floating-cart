@@ -1,165 +1,130 @@
-window.addEventListener('DOMContentLoaded',()=>{
-
-    let itemsInCart =  localStorage.getItem('ctclHiddenCart');
-
-
- if(null != itemsInCart){
-    document.querySelector('.ctcl-floating-cart-item-count').textContent = JSON.parse(itemsInCart).length
- }else{
-    document.querySelector('.ctcl-floating-cart-item-count').textContent = '0';
- }
-
-    
-
-    document.querySelector('.ctcl-floating-cart-icon').addEventListener('mouseenter',e=>{
-
-
-        let subTotal = 0;
-        let itemsInCart =  localStorage.getItem('ctclHiddenCart');
-        let cartCont = document.querySelector('.ctcl-floating-cart-content');
-        let iconBdRect = e.target.getBoundingClientRect();
-
-        cartCont.style.left = `${iconBdRect.left-200+(iconBdRect.width/2)}px`;
-
-       if(cartCont.querySelector('.ctcl-floating-cart-item-list') != null ){
-
-        cartCont.removeChild(document.querySelector('.ctcl-floating-cart-item-list'))
-       }
-
-
-
-        if(null != itemsInCart){
-
-            
-
-            cartCont.querySelector('p').style.display = 'none';
-
-            let itemsCont = document.createElement('div');
-            itemsCont.classList.add('ctcl-floating-cart-item-list');
-
-
-
-            let headerDisplay = document.createElement('div');
-            headerDisplay.classList.add('ctcl-checkout-item-header');
-
-            let imageHead = document.createElement('span');
-            imageHead.className = 'ctcl-co-image-head';
-            headerDisplay.appendChild(imageHead);
-
-            let nameHead = document.createElement('span');
-            nameHead.className = 'ctcl-co-name-head';
-            nameHead.appendChild(document.createTextNode(ctclParams.itemHead));
-            headerDisplay.appendChild(nameHead)
-
-            let priceHead = document.createElement('span');
-            priceHead.className = 'ctcl-co-price-head';
-            priceHead.appendChild(document.createTextNode(ctclParams.priceHead));
-            headerDisplay.appendChild(priceHead)
-
-            let qunHead = document.createElement('span');
-            qunHead.className = 'ctcl-co-qty-head';
-            qunHead.appendChild(document.createTextNode(ctclParams.qtyHead));
-            headerDisplay.appendChild(qunHead)
-
-            let itemTotHead = document.createElement('span');
-            itemTotHead.className = 'ctcl-co-item-total-head';
-            itemTotHead.appendChild(document.createTextNode(ctclParams.itemTotalHead));
-            headerDisplay.appendChild(itemTotHead)
-
-            itemsCont.appendChild(headerDisplay);
-
-            
-
-
-            let cartItems = JSON.parse(itemsInCart);
-
-            for(let i in cartItems){
-
-
-
-                let itemTotal = parseInt(cartItems[i].qty) * parseFloat(cartItems[i].price);
-                subTotal += itemTotal;
-
-
-                let itemDisplay = document.createElement('div');
-                itemDisplay.id = `ctcl-checkout-item-${i}`;
-                itemDisplay.classList.add('ctcl-checkout-item');
-
-                let imgSpan = document.createElement('span');
-                imgSpan.classList.add('ctcl-checkout-item-img-span');
-                let itemImg = new Image();
-                itemImg.src = cartItems[i].pic;
-                itemImg.style.marginLeft='2px';
-                imgSpan.appendChild(itemImg);
-                itemDisplay.appendChild(imgSpan);
-
-                let itemName = document.createElement('span');
-                itemName.classList.add('ctcl-checkout-item-name');
-                itemName.appendChild(document.createTextNode(cartItems[i].name));
-                itemDisplay.append(itemName);
-
-         
-                let itemPrice = document.createElement('span');
-                itemPrice.classList.add('ctcl-checkout-item-price');
-                itemPrice.appendChild(document.createTextNode(cartItems[i].price));
-                itemDisplay.append(itemPrice);
-
-                let itemQty = document.createElement('span');
-                itemQty.classList.add('ctcl-checkout-item-qty');
-                itemQty.appendChild(document.createTextNode(cartItems[i].qty));
-                itemDisplay.append(itemQty);
-
-                let itemTotalSpan = document.createElement('span');
-                itemTotalSpan.classList.add('ctcl-checkout-item-total');
-                itemTotalSpan.appendChild(document.createTextNode(itemTotal.toFixed(2)));
-                
-                itemDisplay.append(itemTotalSpan);
-
-                itemsCont.appendChild(itemDisplay);
-
+/* Presentation only: uses CTC Lite's existing cart and update event. */
+(() => {
+    const init = () => {
+        const params = window.ctclParams || {};
+        const readCart = () => {
+            try {
+                const value = JSON.parse(localStorage.getItem('ctclHiddenCart') || '[]');
+                return Array.isArray(value) ? value.filter(item => item && typeof item === 'object') : [];
+            } catch (_) { return []; }
+        };
+        document.querySelectorAll('.wp-block-ctc-lite-ctcl-floating-cart').forEach((root, index) => {
+            const icon = root.querySelector('.ctcl-floating-cart-icon');
+            const panel = root.querySelector('.ctcl-floating-cart-content');
+            const count = root.querySelector('.ctcl-floating-cart-item-count');
+            if (!icon || !panel || !count) return;
+            let open = false, pinned = false, timer;
+            panel.id = `ctcl-mini-cart-${index}`;
+            panel.setAttribute('role', 'region');
+            panel.setAttribute('aria-label', params.itemHead || 'Cart');
+            icon.setAttribute('role', 'button');
+            icon.tabIndex = 0;
+            icon.setAttribute('aria-label', 'Cart');
+            icon.setAttribute('aria-controls', panel.id);
+            icon.setAttribute('aria-expanded', 'false');
+            const empty = panel.querySelector('p');
+            const element = (tag, className, text) => {
+                const node = document.createElement(tag);
+                node.className = className;
+                if (text !== undefined) node.textContent = text;
+                return node;
+            };
+            const position = () => {
+                if (!open) return;
+                const rect = icon.getBoundingClientRect();
+                const viewport = window.visualViewport;
+                const width = viewport ? viewport.width : document.documentElement.clientWidth;
+                const height = viewport ? viewport.height : window.innerHeight;
+                const x = viewport ? viewport.offsetLeft : 0;
+                const y = viewport ? viewport.offsetTop : 0;
+                panel.style.width = `${Math.min(380, width - 24)}px`;
+                panel.style.left = `${Math.max(x + 12, Math.min(rect.right - panel.offsetWidth, x + width - panel.offsetWidth - 12))}px`;
+                const below = y + height - rect.bottom - 20;
+                const above = rect.top - y - 20;
+                const upward = below < 240 && above > below;
+                panel.style.maxHeight = `${Math.max(80, upward ? above : below)}px`;
+                panel.style.top = `${upward ? Math.max(y + 12, rect.top - panel.offsetHeight - 8) : rect.bottom + 8}px`;
+            };
+            const render = () => {
+                const items = readCart();
+                count.textContent = String(items.length);
+                icon.setAttribute('aria-label', `Cart (${items.length})`);
+                panel.querySelector('.ctcl-floating-cart-item-list')?.remove();
+                if (empty) empty.style.display = items.length ? 'none' : '';
+                if (!items.length) return;
+                const list = element('div', 'ctcl-floating-cart-item-list');
+                let subtotal = 0;
+                items.forEach(item => {
+                    const qty = Number.parseInt(item.qty, 10) || 0;
+                    const price = Number.parseFloat(item.price) || 0;
+                    const total = qty * price;
+                    subtotal += total;
+                    const row = element('div', 'ctcl-mini-item');
+                    const media = element('div', 'ctcl-mini-media');
+                    if (item.pic) {
+                        const img = element('img', 'ctcl-mini-image');
+                        img.alt = '';
+                        img.src = item.pic;
+                        img.addEventListener('error', () => { img.hidden = true; });
+                        media.append(img);
+                    }
+                    const details = element('div', 'ctcl-mini-details');
+                    details.append(element('div', 'ctcl-mini-name', item.name || ''));
+                    details.append(element('div', 'ctcl-mini-meta', `${params.qtyHead || 'Qty'}: ${qty} × ${price.toFixed(2)}`));
+                    row.append(media, details, element('div', 'ctcl-mini-total', total.toFixed(2)));
+                    list.append(row);
+                });
+                const total = element('div', 'ctcl-mini-subtotal');
+                total.append(element('span', '', `${params.subTotal || 'Subtotal'}${params.currency ? ` (${params.currency})` : ''}`), element('strong', '', subtotal.toFixed(2)));
+                list.append(total);
+                panel.append(list);
+            };
+            const show = () => {
+                clearTimeout(timer);
+                if (!open) render();
+                open = true;
+                panel.style.display = 'block';
+                icon.setAttribute('aria-expanded', 'true');
+                position();
+            };
+            const hide = () => {
+                clearTimeout(timer);
+                open = pinned = false;
+                panel.style.display = 'none';
+                icon.setAttribute('aria-expanded', 'false');
+            };
+            const leave = () => {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    if (!pinned && !icon.matches(':hover') && !panel.matches(':hover') && !root.contains(document.activeElement)) hide();
+                }, 180);
+            };
+            // mouseleave ignores transitions between the icon and its child badge.
+            [icon, panel].forEach(node => {
+                node.addEventListener('mouseenter', () => { if (matchMedia('(hover: hover)').matches) show(); });
+                node.addEventListener('mouseleave', leave);
+            });
+            icon.addEventListener('click', () => { if (pinned) hide(); else { pinned = true; show(); } });
+            icon.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); icon.click(); }
+            });
+            root.addEventListener('focusout', () => setTimeout(() => { if (!root.contains(document.activeElement)) hide(); }, 0));
+            document.addEventListener('keydown', event => { if (event.key === 'Escape' && open) hide(); });
+            document.addEventListener('pointerdown', event => { if (!root.contains(event.target)) hide(); });
+            const update = () => { render(); position(); };
+            // CTC Lite may dispatch before removing the last item from storage.
+            document.addEventListener('addRemoveProduct', () => queueMicrotask(update));
+            window.addEventListener('storage', event => { if (event.key === 'ctclHiddenCart' || event.key === null) update(); });
+            window.addEventListener('resize', position);
+            window.addEventListener('scroll', position, true);
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', position);
+                window.visualViewport.addEventListener('scroll', position);
             }
-
-
-            let subTotalCont = document.createElement('div');
-            subTotalCont.id = "ctcl-subtotal-container";
-
-            let subTotalLabel = document.createElement('span');
-            subTotalLabel.classList.add('ctcl-sub-total-label');
-            subTotalLabel.appendChild(document.createTextNode(ctclParams.subTotal + ' (' + ctclParams.currency + ') : '));
-            subTotalCont.appendChild(subTotalLabel);
-
-
-            let subTotalVal = document.createElement('span');
-            subTotalVal.classList.add('ctcl-total-shipping-cost');
-            subTotalVal.appendChild(document.createTextNode(parseFloat(subTotal).toFixed(2)));
-            subTotalVal.style.marginRight = '5px';
-            subTotalCont.appendChild(subTotalVal);
-            
-            itemsCont.appendChild(subTotalCont);
-
-
-            cartCont.appendChild(itemsCont);
-
-
-        
-
-        }else{
-
-            
-            cartCont.querySelector('p').style.display = '';
-
-        }
-
-        cartCont.style.display = ''
-    });
-
-    document.addEventListener('addRemoveProduct', e=>{
-        document.querySelector('.ctcl-floating-cart-item-count').textContent =  e.detail;
-    });
-
-    document.querySelector('.ctcl-floating-cart-icon').addEventListener('mouseout',e=>{
-        document.querySelector('.ctcl-floating-cart-content').style.display = 'none';
-    })
-
-
-})
+            render();
+            hide();
+        });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+})();

@@ -1,0 +1,1 @@
+{"name":"ctcl-floating-cart-tests","private":true,"scripts":{"test":"node --test *.cjs"},"devDependencies":{"jsdom":"22.1.0"}}

@@ -3,7 +3,7 @@ Contributors: UjW0L
 Donate link: https://www.patreon.com/ujw0l/membership
 Tags: block, ctc-lite, ecommerce, cart, floating cart
 Tested up to: 6.6
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,14 @@ The floating cart block can be added wherever blocks are supported. It is ideall
 3. **👀 Floating Cart on Frontend:** View the floating cart as it appears to users.
 
 == Changelog ==
+
+= 0.1.1 =
+* Refined the floating cart layout, item images, badge, subtotal and empty state.
+* Added responsive panel sizing and scrolling for long carts.
+* Fixed cart dismissal when moving over the icon or into the panel.
+* Added click, keyboard, Escape and outside-click controls.
+* Fixed stale counts after removing the final cart item.
+* Kept the editor preview inside its block and fixed the block-save translation import.
 
 = 0.1.0 =
 * Initial release 🚀

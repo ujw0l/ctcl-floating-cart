@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "ctc-lite/ctcl-floating-cart",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "title": "CTCL Floating Cart",
   "category": "ctc-lite-blocks",
   "icon": "cart",

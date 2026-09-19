@@ -1,9 +1,57 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
- .ctcl-floating-empty-cart-content::before{
-	padding-top:3px;
- }
+/* Scoped presentation; saved block markup and merchant icon colors stay intact. */
+.wp-block-ctc-lite-ctcl-floating-cart { position: relative; max-width: 100%; }
+.wp-block-ctc-lite-ctcl-floating-cart *,
+.wp-block-ctc-lite-ctcl-floating-cart *::before { box-sizing: border-box; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-floating-cart-icon {
+    position: relative; display: inline-flex !important; align-items: center;
+    justify-content: center; min-width: 44px; min-height: 44px;
+    padding: 10px !important; border-radius: 12px; line-height: 1;
+    box-shadow: 0 2px 8px rgb(23 36 45 / 10%); touch-action: manipulation;
+    transition: box-shadow .18s ease, filter .18s ease;
+}
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-floating-cart-icon::before,
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-floating-cart-icon > div { pointer-events: none; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-floating-cart-icon:hover { filter: brightness(.96); box-shadow: 0 4px 14px rgb(23 36 45 / 16%); }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-floating-cart-icon:focus-visible { outline: 3px solid #3858e9; outline-offset: 4px; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-floating-cart-icon > div {
+    top: -6px; right: -7px; margin: 0 !important; padding: 3px 5px !important;
+    min-width: 21px; min-height: 21px; border: 2px solid #fff !important;
+    border-radius: 999px !important; font: 600 11px/1.2 system-ui, sans-serif !important;
+    box-shadow: 0 2px 5px rgb(23 36 45 / 12%);
+}
+.wp-block-ctc-lite-ctcl-floating-cart div.ctcl-floating-cart-content {
+    position: fixed !important; margin: 0 !important; padding: 8px 18px;
+    max-width: calc(100vw - 24px); overflow: auto; overscroll-behavior: contain;
+    border: 1px solid #dce3e7 !important; border-radius: 16px !important;
+    background: #fff !important; color: #17242d !important;
+    box-shadow: 0 16px 48px rgb(23 36 45 / 18%), 0 2px 8px rgb(23 36 45 / 5%) !important;
+    text-align: start !important; font: 400 14px/1.5 system-ui, sans-serif;
+}
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-floating-cart-content > p {
+    position: static !important; margin: 0; padding: 30px 12px;
+    text-align: center; color: #586771; overflow-wrap: anywhere;
+}
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-floating-cart-content > p::before {
+    display: block; margin: 0 auto 12px; font-size: 30px; color: #8b98a1;
+}
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-item {
+    display: grid; grid-template-columns: 56px minmax(0, 1fr) auto;
+    align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid #edf0f2;
+}
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-media { width: 56px; height: 64px; overflow: hidden; background: #f5f7f8; border-radius: 8px; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-image { display: block; width: 100%; height: 100%; object-fit: contain; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-image[hidden] { display: none; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-details { min-width: 0; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-name { font-weight: 600; overflow-wrap: anywhere; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-meta { margin-top: 5px; color: #586771; font-size: 12px; overflow-wrap: anywhere; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-total { font-weight: 600; font-variant-numeric: tabular-nums; max-width: 90px; overflow-wrap: anywhere; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-subtotal { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0 12px; font-size: 14px; overflow-wrap: anywhere; }
+.wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-subtotal strong { font-size: 17px; font-variant-numeric: tabular-nums; }
+@media (max-width: 360px) {
+    .wp-block-ctc-lite-ctcl-floating-cart div.ctcl-floating-cart-content { padding: 6px 12px; }
+    .wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-item { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 8px; }
+    .wp-block-ctc-lite-ctcl-floating-cart .ctcl-mini-media { width: 44px; height: 54px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .wp-block-ctc-lite-ctcl-floating-cart .ctcl-floating-cart-icon { transition: none; }
+}

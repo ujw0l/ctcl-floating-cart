@@ -1,4 +1,4 @@
-import {useEffect,useRef} from 'react'; 
+import {useRef} from 'react'; 
 import {PanelBody,RangeControl, ColorPicker} from  '@wordpress/components';
 
 /**
@@ -38,18 +38,6 @@ export default function Edit({attributes,setAttributes}) {
 	const cartIcon = useRef('');
 	const cartContent = useRef('');
 
-	useEffect(()=>{
-
-		
-
-		cartIcon.current.addEventListener('mouseenter',e=> {
-			
-			cartContent.current.style.left = `-${200 -(cartIcon.current.offsetWidth/2)}px`
-			cartContent.current.style.display= '' 
-	});
-		cartIcon.current.addEventListener('mouseout',e=>cartContent.current.style.display='none');
-
-	});
 
 
 	return (
@@ -63,7 +51,7 @@ export default function Edit({attributes,setAttributes}) {
 		   
 
 		   label={ __('Cart Icon Size ', 'ctcl-floating-cart')}
-		   min= {25}
+		   min= {20}
 		   max= {100}
 		   onChange = { val => setAttributes({ iconSize: val })}
 		   value = {attributes.iconSize}
@@ -142,3 +130,4 @@ onChange={val=> setAttributes({bgColor:val})}
 </div>
 	);
 }
+

@@ -5,6 +5,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -28,3 +29,4 @@ export default function save({attributes}) {
 		</div>
 	);
 }
+
